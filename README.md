@@ -36,10 +36,11 @@ This vulnerability is on the Login page for the green website. The mistake the d
 
 GIF Walkthrough: <img src="green1.gif" width="900">
 
-Vulnerability #2: Cross Site Scripting: In the contact tab, you can add a script when submitting a comment to the user. This allows the attacker to be spamm the users with pop ups.
+Vulnerability #2: Cross-Site Scripting:
+On the contact page where users can leave feedback, the user has the ability to execute an XSS attack by injecting JavaScript into the name input of the form. In the walkthrough, I show how an alert injected by a public user can be executed when a staff member reviews the feedback. The browser on the left shows the attacker's perspective and the one on the right shows the target's perspective. 
 
-#####ADD GIF HERE
 
+GIF Walkthrough: <img src="green2.gif" width="900">
 
 ## Red
 
