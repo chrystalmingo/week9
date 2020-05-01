@@ -17,16 +17,17 @@ Each version of the site has been given two of the six vulnerabilities. (In othe
 ## Blue
 
 Vulnerability #1: Session Hijacking/Fixation:  
-* You log in to find the Session ID ussing the change_session_id script.
+Since the session ID is not regenerated for this website, even when the user agent string changes, it is vulnerable to session hijacking. In the walkthrough, I showed how I can set the session ID in one browser (Google Chrome) to the one generated from logging in to the website using another browser (Safari). The attacker in the Google Chrome browser and is able to gain access to the staff area, example Saleperson as shown below.
 
-###ADD GIFS HERE
+GIF Walkthrough: <img src="blue1.gif" width="800">
 
 Vulnerability #2: SQL Injection (SQLi): 
 * Check the url and find the id, replace the value with "2" . After include sleep(). Ex: " 2' and SLEEP(5)=0--' "
 
 ## Green
 
-Vulnerability #1:User Enumeration: When you log in with a valid username and fail to log in you get bolded error message, if you try to log in with an invalid username the bolded error gets unbolded.
+Vulnerability #1:User Enumeration
+This vulnerability is on the Login page for the green website. The mistake the developer made was assigning a different class to failed login attempt message for valid usernames and invalid usernames. As shown in the walkthrough, attempting to login with the invalid username 'random' results in a 'Log in was unsuccessful' message that is bolded, under the class 'failed'. On the other hand, attempting to login with the valid username 'pperson' with the incorrect password results in the same message unbolded, under the class 'failure'. An attacker can use this vulnerability to enumerate through usernames to figure out which are valid.
 
 #####ADD GIF HERE
 
