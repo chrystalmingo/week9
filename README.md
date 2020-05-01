@@ -19,14 +19,16 @@ Each version of the site has been given two of the six vulnerabilities. (In othe
 Vulnerability #1: Session Hijacking/Fixation:  
 Since the session ID is not regenerated for this website, even when the user agent string changes, it is vulnerable to session hijacking. In the walkthrough, I showed how I can set the session ID in one browser (Google Chrome) to the one generated from logging in to the website using another browser (Safari). The attacker in the Google Chrome browser and is able to gain access to the staff area, example Saleperson as shown below.
 
-GIF Walkthrough: <img src="blue1.gif" width="800">
+GIF Walkthrough: <img src="blue1.gif" width="900">
 
-Vulnerability #2: SQL Injection (SQLi): 
-* Check the url and find the id, replace the value with "2" . After include sleep(). Ex: " 2' and SLEEP(5)=0--' "
+Vulnerability #2: SQL Injection:
+Under the salesperson information page, the user can perform an attack by adding a SQL injection to the end of the URL. As shown in the walkthrough, when adding ``` ' OR SLEEP(5)=0--' ``` to the end of the URL, the website shows a different staff member's profile, indicating that it responded to the SQL that was added. The mistake the developer made was not sanitizing the URL input.
+
+GIF Walkthrough: <img src="blue2.gif" width="900">
 
 ## Green
 
-Vulnerability #1:User Enumeration
+Vulnerability #1: User Enumeration:
 This vulnerability is on the Login page for the green website. The mistake the developer made was assigning a different class to failed login attempt message for valid usernames and invalid usernames. As shown in the walkthrough, attempting to login with the invalid username 'random' results in a 'Log in was unsuccessful' message that is bolded, under the class 'failed'. On the other hand, attempting to login with the valid username 'pperson' with the incorrect password results in the same message unbolded, under the class 'failure'. An attacker can use this vulnerability to enumerate through usernames to figure out which are valid.
 
 #####ADD GIF HERE
